@@ -14,8 +14,8 @@ function TodoList() {
         <TodoListApp>
             <TodoListWrapper>
                 <InputBtnContainer>
-                <Input />
-                <Button />
+                    <Input name='input' placeholder="Enter your task"/>
+                    <Button />
                 </InputBtnContainer>
                 <ListContainer>
                     <List />

@@ -12,10 +12,12 @@ display: flex;
 flex-direction: column;
 justify-content: space-evenly;
 align-items: center;
-gap: 10px;
+/* gap: 10px; */
 padding: 40px;
-width: 400px;
-height: 450px;
+width: clamp(450px, 50%, 600px);
+min-height: 500px;
+height: auto;
+max-height: 600px;
 border-radius: 20px;
 box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
 `
@@ -27,8 +29,8 @@ align-items: center;
 gap: 20px;
 width: 100%;
 height: 45px;
-border-radius: 20px;
-box-shadow: 0 4px 12px rgba(156, 41, 41, 0.4);
+/* box-shadow: 0 4px 12px rgba(156, 41, 41, 0.4); */
+
 `
 
 // ! TODO weiter
@@ -40,7 +42,9 @@ justify-content: space-evenly;
 align-items: center;
 gap: 20px;
 width: 100%;
-height: calc(100% - 100px);
+/* height: calc(100% - 50px); */
+min-height: 270px;
+max-height: 300px;
 border-radius: 20px;
 box-shadow: 0 4px 12px rgba(225, 225, 225, 0.4);
 `
