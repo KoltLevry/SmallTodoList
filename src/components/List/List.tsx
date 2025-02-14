@@ -1,9 +1,11 @@
+import { ListBox, ListItem } from "./styles";
+
 function List() {
     return(
         <>
-        <ul>
-            
-        </ul>
+        <ListBox>
+            <ListItem>Task</ListItem>
+        </ListBox>
         </>
     );
 }

@@ -5,7 +5,8 @@ display: flex;
 flex-direction: column;
 gap: 4px;
 padding: 6px;
-width: 100%;
+min-width: 400px;
+max-width: 500px;
 `
 
 export const Label = styled.label`
@@ -16,7 +17,6 @@ width: 100%;
 `
 
 export const InputElement = styled.input`
-width: calc(100% - 100px);
 padding: 10px;
 outline: none;
 border: none;

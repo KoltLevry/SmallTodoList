@@ -12,7 +12,7 @@ display: flex;
 flex-direction: column;
 justify-content: space-evenly;
 align-items: center;
-/* gap: 10px; */
+gap: 20px;
 padding: 40px;
 width: clamp(450px, 50%, 600px);
 min-height: 500px;
@@ -30,19 +30,15 @@ gap: 20px;
 width: 100%;
 height: 45px;
 /* box-shadow: 0 4px 12px rgba(156, 41, 41, 0.4); */
-
 `
-
-// ! TODO weiter
 
 export const ListContainer = styled.div`
 display: flex;
-flex-direction: column;
-justify-content: space-evenly;
-align-items: center;
+/* flex-direction: column; */
+justify-content: space-between;
+/* align-items: center; */
 gap: 20px;
 width: 100%;
-/* height: calc(100% - 50px); */
 min-height: 270px;
 max-height: 300px;
 border-radius: 20px;
@@ -57,5 +53,4 @@ gap: 20px;
 width: 100%;
 height: 45px;
 border-radius: 20px;
-box-shadow: 0 4px 12px rgba(41, 104, 156, 0.4);
 `

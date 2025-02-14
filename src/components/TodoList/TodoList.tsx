@@ -15,14 +15,14 @@ function TodoList() {
             <TodoListWrapper>
                 <InputBtnContainer>
                     <Input name='input' placeholder="Enter your task"/>
-                    <Button />
+                    <Button name={"Add"}/>
                 </InputBtnContainer>
                 <ListContainer>
                     <List />
                 </ListContainer>
                 <BottomBtnsContainer>
-                    <Button />
-                    <Button />
+                    <Button name={"Delete all"}/>
+                    <Button name={"Save all"}/>
                 </BottomBtnsContainer>
             </TodoListWrapper>
         </TodoListApp>
