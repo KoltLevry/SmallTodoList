@@ -1,3 +1,4 @@
+import TodoList from './components/TodoList/TodoList'
 import GlobalStyles from './styles/GlobalStyles'
 
 function App() {
@@ -5,7 +6,7 @@ function App() {
   return (
     <>
     <GlobalStyles />
-      Hi App!
+      <TodoList />
     </>
   )
 }

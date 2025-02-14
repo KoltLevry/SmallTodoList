@@ -1,5 +1,57 @@
 import styled from '@emotion/styled';
 
-export const TodoListWrapper = styled.div`
+export const TodoListApp = styled.div`
+display: flex;
+justify-content: center;
+align-items: center;
+width: 100%;
+`
 
+export const TodoListWrapper = styled.div`
+display: flex;
+flex-direction: column;
+justify-content: space-evenly;
+align-items: center;
+gap: 10px;
+padding: 40px;
+width: 400px;
+height: 450px;
+border-radius: 20px;
+box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+`
+
+export const InputBtnContainer = styled.div`
+display: flex;
+justify-content: space-evenly;
+align-items: center;
+gap: 20px;
+width: 100%;
+height: 45px;
+border-radius: 20px;
+box-shadow: 0 4px 12px rgba(156, 41, 41, 0.4);
+`
+
+// ! TODO weiter
+
+export const ListContainer = styled.div`
+display: flex;
+flex-direction: column;
+justify-content: space-evenly;
+align-items: center;
+gap: 20px;
+width: 100%;
+height: calc(100% - 100px);
+border-radius: 20px;
+box-shadow: 0 4px 12px rgba(225, 225, 225, 0.4);
+`
+
+export const BottomBtnsContainer = styled.div`
+display: flex;
+justify-content: space-evenly;
+align-items: center;
+gap: 20px;
+width: 100%;
+height: 45px;
+border-radius: 20px;
+box-shadow: 0 4px 12px rgba(41, 104, 156, 0.4);
 `
