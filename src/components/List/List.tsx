@@ -1,10 +1,12 @@
 import { ListBox, ListItem } from "./styles";
+import { ListProps } from "./types";
 
-function List() {
+function List( {children}: ListProps ) {
     return(
         <>
         <ListBox>
-            <ListItem>Task</ListItem>
+            {/* <ListItem>Task</ListItem> */}
+            {children}
         </ListBox>
         </>
     );
