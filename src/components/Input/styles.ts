@@ -6,7 +6,7 @@ flex-direction: column;
 gap: 4px;
 padding: 6px;
 min-width: 400px;
-max-width: 500px;
+/* outline: none; */
 `
 
 export const Label = styled.label`

@@ -15,9 +15,15 @@ function TodoList() {
     const [listItems, setListItems] = useState<string[]>([]);
 
     const handleClickAddTask = () => {
-        if (inputRef.current && inputRef.current.value.trim()) {
+        // if (inputRef.current && inputRef.current.value.trim()) {
+            // setListItems((prev) => [...prev, inputRef.current!.value]);
+            // inputRef.current.value = ""; 
+        // }
+        if(inputRef.current) {
+            console.log(inputRef.current.value);
             setListItems((prev) => [...prev, inputRef.current!.value]);
-            inputRef.current.value = ""; 
+            console.log(listItems);
+            inputRef.current.value = "";
         }
     };
 
@@ -30,13 +36,21 @@ function TodoList() {
                 </InputBtnContainer>
                 <ListContainer>
                     <List>
-                        {listItems.map((item, index) => (
+                        {/* {listItems.map((item, index) => (
                             <li key={index}>{item}</li>
-                        ))}
+                        ))} */}
+                        <li>Hi</li>
+                        <h1>Hi 2</h1>
+                        <h1>Hi</h1>
+                        <h1>Hi 2</h1>
+                        <h1>Hi</h1>
+                        <h1>Hi 2</h1>
+                        <h1>Hi</h1>
+                        <h1>Hi 2</h1>
                     </List>
                 </ListContainer>
                 <BottomBtnsContainer>
-                    <Button name="Delete all" onClick={() => setListItems([])} />
+                    <Button name="Delete all" onClick={() => {}} />
                     <Button name="Save all" />
                 </BottomBtnsContainer>
             </TodoListWrapper>

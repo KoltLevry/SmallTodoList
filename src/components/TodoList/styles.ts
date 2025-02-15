@@ -14,10 +14,6 @@ justify-content: space-evenly;
 align-items: center;
 gap: 20px;
 padding: 40px;
-width: clamp(450px, 50%, 600px);
-min-height: 500px;
-height: auto;
-max-height: 600px;
 border-radius: 20px;
 box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
 `

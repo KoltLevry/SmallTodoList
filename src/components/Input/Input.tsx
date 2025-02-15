@@ -9,7 +9,8 @@ function Input( {
     id,
     value,
     onChange,
-    error
+    error,
+    ref,
 }: InputProps) {
     return(
         <InputContainer>
@@ -21,6 +22,7 @@ function Input( {
             placeholder={placeholder}
             value={value}
             onChange={onChange}
+            ref={ref}
         />
         <p>{error}</p>
         </InputContainer>
