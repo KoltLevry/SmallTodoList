@@ -1,7 +1,8 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Button from "../Button/Button";
 import Input from "../Input/Input";
 import List from "../List/List";
+import { Task } from "./types";
 import { 
     TodoListWrapper,
     TodoListApp,
@@ -14,49 +15,80 @@ import {
     ListItemText,
 } from "./styles";
 
+const getSavedTasks = () => {
+    const savedTasks = localStorage.getItem('tasks');
+    return savedTasks ? JSON.parse(savedTasks) : [];
+}
+
 function TodoList() {
     const inputRef = useRef<HTMLInputElement | null>(null);
-    const [listItems, setListItems] = useState<string[]>([]);
-    const [completedTasks, setCompletedTasks] = useState<boolean[]>([]);
-    const [isActive, setisActive] = useState<boolean>(true);
+    const [tasks, setTasks] = useState<Task[]>([])
+    const [isEditingId, setIsEditingId] = useState<number | null>(null);
+    const [editingText, setEditingText] = useState("");
 
-    const [isActiveDoneBtn, setIsActiveDoneBtn] = useState<boolean>(true);
-    const [isActiveEditBtn, setIsActiveEditBtn] = useState<boolean>(true);
-    const [isActiveDelBtn, setIsActiveDelBtn] = useState<boolean>(true);
+    const saveTasksToLocalStorage = () => {
+        localStorage.setItem('tasks', JSON.stringify(tasks));
+    };
+
+    useEffect(() => {
+        const savedTasks = getSavedTasks();
+        if(savedTasks.length) {
+            setTasks(savedTasks);
+        }
+    }, []);
 
     const handleClickAddTask = () => {
         if(inputRef.current && inputRef.current.value.trim()) {
-            const task = inputRef.current!.value.trim();
-            setListItems((prev) => [...prev, task]);
-            setCompletedTasks( (prev) => [...prev, false]);
+            const task = {
+                id: Date.now(),
+                text: inputRef.current.value.trim(),
+                completed: false,
+                isEditing: false,
+            }
+            setTasks(prev => [...prev, task]);
             inputRef.current!.value = "";
         }
     };
 
     const handleClickDeleteAll = () => {
-        setListItems([]);
-        setCompletedTasks([]);
+        setTasks([]);
+        localStorage.removeItem('tasks');
+    };
+
+    const handleDeleteTask = (id: number) => {
+        setTasks(prev => prev.filter(task => task.id !==id));
+    };
+
+    const handleToggleCompleted = (id: number) => {
+        setTasks(prev => prev.map(task => 
+            task.id === id ? {...task, completed: !task.completed } : task
+        ));
     }
 
-    const handleDeleteTask = (index: number) => {
-        setListItems(prev => prev.filter((_,i) => i !== index));
-        setCompletedTasks(prev => prev.filter((_,i) => i !== index));
+    const handleToggleEdit = (id: number) => {
+        setTasks(prev => prev.map(task => 
+            task.id === id ? {...task, isEditing: !task.isEditing} : task
+        ))
     }
 
-    const handleSetCompletedTask = (index: number) => {
-        setCompletedTasks(prev => {
-            const newCompletedTasks = [...prev];
-            newCompletedTasks[index] = !newCompletedTasks[index];
-            return newCompletedTasks;
-        });
+    const handleEditTaskText = (id: number, newText: string) => {
+        setTasks(prev => prev.map(task =>
+            task.id === id ? {...task, text: newText, isEditing: false} : task
+        ))        
     }
 
-    const handleEditText = (index: number) => {
-        setIsActiveDoneBtn(prev => !prev);
-        // setIsActiveEditBtn(prev => !prev);
-        setIsActiveDelBtn(prev => !prev);
-        
-    }
+    const handleStartEditing = (id: number, text: string) => {
+        setIsEditingId(id);
+        setEditingText(text);
+    };
+
+    const handleSaveTask = (id: number) => {
+        setTasks(prev => prev.map(task =>
+            task.id === id ? { ...task, text: editingText } : task
+        ));
+        setIsEditingId(null);
+    };
+   
 
     return (
         <TodoListApp>
@@ -67,39 +99,68 @@ function TodoList() {
                 </InputBtnContainer>
                 <ListContainer>
                     <List>
-                        {
-                            listItems.map( (item, index) => (
-                                <ListItem key={Math.random()}>
-                                    <ListItemText isStrikeThrough={completedTasks[index]}>{item}</ListItemText>
-                                    <SmallTaskButtonDiv>
+                        {tasks.map((task) => (
+                            <ListItem key={task.id}>
+                                {isEditingId === task.id ? (
+                                    <input 
+                                        type="text" 
+                                        value={editingText} 
+                                        onChange={(e) => setEditingText(e.target.value)} 
+                                        autoFocus
+                                    />
+                                ) : (
+                                    <ListItemText isStrikeThrough={task.completed}>
+                                        {task.text}
+                                    </ListItemText>
+                                )}
+                                <SmallTaskButtonDiv>
+                                    {/* Виконати (неактивна під час редагування) */}
+                                    <SmallTaskButton 
+                                        mainColor="lightgreen" 
+                                        onClick={() => handleToggleCompleted(task.id)}
+                                        isActive={isEditingId !== task.id}
+                                    >
+                                        ✔
+                                    </SmallTaskButton>
+    
+                                    {/* Редагувати або Зберегти */}
+                                    {isEditingId === task.id ? (
                                         <SmallTaskButton 
-                                            mainColor="lightgreen" 
-                                            onClick={() => handleSetCompletedTask(index)}
-                                            isActive={isActiveDoneBtn}
-                                        >✔</SmallTaskButton>
+                                            mainColor="lightblue"
+                                            onClick={() => handleSaveTask(task.id)}
+                                        >
+                                            💾
+                                        </SmallTaskButton>
+                                    ) : (
                                         <SmallTaskButton 
-                                            mainColor='lightyellow' 
-                                            onClick={() => {handleEditText(index)}}
-                                            isActive={isActiveEditBtn}
-                                        >🖊️</SmallTaskButton>
-                                        <SmallTaskButton 
-                                            mainColor="lightsalmon" 
-                                            onClick={()=>(handleDeleteTask(index))}
-                                            isActive={isActiveDelBtn}                                            
-                                            >❌</SmallTaskButton>
-                                    </SmallTaskButtonDiv>
-                                </ListItem>
-                            ))
-                        }
+                                            mainColor="lightyellow"
+                                            onClick={() => handleStartEditing(task.id, task.text)}
+                                        >
+                                            🖊️
+                                        </SmallTaskButton>
+                                    )}
+    
+                                    {/* Видалити (неактивна під час редагування) */}
+                                    <SmallTaskButton 
+                                        mainColor="lightsalmon" 
+                                        onClick={() => handleDeleteTask(task.id)}
+                                        isActive={isEditingId !== task.id}
+                                    >
+                                        ❌
+                                    </SmallTaskButton>
+                                </SmallTaskButtonDiv>
+                            </ListItem>
+                        ))}
                     </List>
                 </ListContainer>
                 <BottomBtnsContainer>
                     <Button name="Delete all" onClick={handleClickDeleteAll} />
-                    <Button name="Save all" />
+                    <Button name="Save all" onClick={saveTasksToLocalStorage}/>
                 </BottomBtnsContainer>
             </TodoListWrapper>
         </TodoListApp>
     );
+    
 }
 
 export default TodoList;
