@@ -30,13 +30,10 @@ height: 45px;
 
 export const ListContainer = styled.div`
 display: flex;
-/* flex-direction: column; */
 justify-content: space-between;
-/* align-items: center; */
 gap: 20px;
 width: 100%;
-min-height: 270px;
-max-height: 300px;
+height: 300px;
 border-radius: 20px;
 box-shadow: 0 4px 12px rgba(225, 225, 225, 0.4);
 `

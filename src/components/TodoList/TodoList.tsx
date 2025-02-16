@@ -15,15 +15,10 @@ function TodoList() {
     const [listItems, setListItems] = useState<string[]>([]);
 
     const handleClickAddTask = () => {
-        // if (inputRef.current && inputRef.current.value.trim()) {
-            // setListItems((prev) => [...prev, inputRef.current!.value]);
-            // inputRef.current.value = ""; 
-        // }
-        if(inputRef.current) {
-            console.log(inputRef.current.value);
-            setListItems((prev) => [...prev, inputRef.current!.value]);
-            console.log(listItems);
-            inputRef.current.value = "";
+        if(inputRef.current && inputRef.current.value.trim()) {
+            const task = inputRef.current!.value.trim();
+            setListItems((prev) => [...prev, task]);
+            inputRef.current!.value = "";
         }
     };
 
@@ -36,17 +31,11 @@ function TodoList() {
                 </InputBtnContainer>
                 <ListContainer>
                     <List>
-                        {/* {listItems.map((item, index) => (
-                            <li key={index}>{item}</li>
-                        ))} */}
-                        <li>Hi</li>
-                        <h1>Hi 2</h1>
-                        <h1>Hi</h1>
-                        <h1>Hi 2</h1>
-                        <h1>Hi</h1>
-                        <h1>Hi 2</h1>
-                        <h1>Hi</h1>
-                        <h1>Hi 2</h1>
+                        {
+                            listItems.map( item => (
+                                <li key={Math.random()}>{item}</li>
+                            ))
+                        }
                     </List>
                 </ListContainer>
                 <BottomBtnsContainer>
