@@ -11,32 +11,51 @@ import {
     ListItem,
     SmallTaskButtonDiv,
     SmallTaskButton,
+    ListItemText,
 } from "./styles";
 
 function TodoList() {
     const inputRef = useRef<HTMLInputElement | null>(null);
     const [listItems, setListItems] = useState<string[]>([]);
+    const [completedTasks, setCompletedTasks] = useState<boolean[]>([]);
+    const [isActive, setisActive] = useState<boolean>(true);
+
+    const [isActiveDoneBtn, setIsActiveDoneBtn] = useState<boolean>(true);
+    const [isActiveEditBtn, setIsActiveEditBtn] = useState<boolean>(true);
+    const [isActiveDelBtn, setIsActiveDelBtn] = useState<boolean>(true);
 
     const handleClickAddTask = () => {
         if(inputRef.current && inputRef.current.value.trim()) {
             const task = inputRef.current!.value.trim();
             setListItems((prev) => [...prev, task]);
+            setCompletedTasks( (prev) => [...prev, false]);
             inputRef.current!.value = "";
         }
     };
 
     const handleClickDeleteAll = () => {
         setListItems([]);
+        setCompletedTasks([]);
     }
 
-    const fruits = ['app', 'sw', "red"];
-    console.log(fruits);
-    const findRight = fruits.splice(1,1);
-    console.log(findRight);
-    console.log(fruits);
-
     const handleDeleteTask = (index: number) => {
-        setListItems(prev => prev.filter((_, i) => i !== index));
+        setListItems(prev => prev.filter((_,i) => i !== index));
+        setCompletedTasks(prev => prev.filter((_,i) => i !== index));
+    }
+
+    const handleSetCompletedTask = (index: number) => {
+        setCompletedTasks(prev => {
+            const newCompletedTasks = [...prev];
+            newCompletedTasks[index] = !newCompletedTasks[index];
+            return newCompletedTasks;
+        });
+    }
+
+    const handleEditText = (index: number) => {
+        setIsActiveDoneBtn(prev => !prev);
+        // setIsActiveEditBtn(prev => !prev);
+        setIsActiveDelBtn(prev => !prev);
+        
     }
 
     return (
@@ -51,11 +70,23 @@ function TodoList() {
                         {
                             listItems.map( (item, index) => (
                                 <ListItem key={Math.random()}>
-                                    {item}
+                                    <ListItemText isStrikeThrough={completedTasks[index]}>{item}</ListItemText>
                                     <SmallTaskButtonDiv>
-                                        <SmallTaskButton onClick={() => {}}>✔</SmallTaskButton>
-                                        <SmallTaskButton onClick={() => {}}>🖊️</SmallTaskButton>
-                                        <SmallTaskButton onClick={handleDeleteTask}>❌</SmallTaskButton>
+                                        <SmallTaskButton 
+                                            mainColor="lightgreen" 
+                                            onClick={() => handleSetCompletedTask(index)}
+                                            isActive={isActiveDoneBtn}
+                                        >✔</SmallTaskButton>
+                                        <SmallTaskButton 
+                                            mainColor='lightyellow' 
+                                            onClick={() => {handleEditText(index)}}
+                                            isActive={isActiveEditBtn}
+                                        >🖊️</SmallTaskButton>
+                                        <SmallTaskButton 
+                                            mainColor="lightsalmon" 
+                                            onClick={()=>(handleDeleteTask(index))}
+                                            isActive={isActiveDelBtn}                                            
+                                            >❌</SmallTaskButton>
                                     </SmallTaskButtonDiv>
                                 </ListItem>
                             ))
