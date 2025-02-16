@@ -47,3 +47,28 @@ width: 100%;
 height: 45px;
 border-radius: 20px;
 `
+
+
+export const ListItem = styled.li`
+list-style: none;
+list-style-position: outside;
+display: flex;
+justify-content: space-between;
+align-items: center;
+margin-right: 10px;
+margin-left: -20px;
+padding: 10px;
+font-size: 24px;
+border: 1px solid white;
+border-bottom-color: rgba(0,0,0,0.1);
+`
+
+export const SmallTaskButtonDiv = styled.div`
+display: flex;
+justify-content: space-between;
+align-items: center;
+gap: 8px;
+`
+
+export const SmallTaskButton = styled.button`
+`

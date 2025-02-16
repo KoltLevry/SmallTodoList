@@ -8,6 +8,9 @@ import {
     InputBtnContainer,
     ListContainer,
     BottomBtnsContainer,
+    ListItem,
+    SmallTaskButtonDiv,
+    SmallTaskButton,
 } from "./styles";
 
 function TodoList() {
@@ -22,6 +25,20 @@ function TodoList() {
         }
     };
 
+    const handleClickDeleteAll = () => {
+        setListItems([]);
+    }
+
+    const fruits = ['app', 'sw', "red"];
+    console.log(fruits);
+    const findRight = fruits.splice(1,1);
+    console.log(findRight);
+    console.log(fruits);
+
+    const handleDeleteTask = (index: number) => {
+        setListItems(prev => prev.filter((_, i) => i !== index));
+    }
+
     return (
         <TodoListApp>
             <TodoListWrapper>
@@ -32,14 +49,21 @@ function TodoList() {
                 <ListContainer>
                     <List>
                         {
-                            listItems.map( item => (
-                                <li key={Math.random()}>{item}</li>
+                            listItems.map( (item, index) => (
+                                <ListItem key={Math.random()}>
+                                    {item}
+                                    <SmallTaskButtonDiv>
+                                        <SmallTaskButton onClick={() => {}}>✔</SmallTaskButton>
+                                        <SmallTaskButton onClick={() => {}}>🖊️</SmallTaskButton>
+                                        <SmallTaskButton onClick={handleDeleteTask}>❌</SmallTaskButton>
+                                    </SmallTaskButtonDiv>
+                                </ListItem>
                             ))
                         }
                     </List>
                 </ListContainer>
                 <BottomBtnsContainer>
-                    <Button name="Delete all" onClick={() => {}} />
+                    <Button name="Delete all" onClick={handleClickDeleteAll} />
                     <Button name="Save all" />
                 </BottomBtnsContainer>
             </TodoListWrapper>
