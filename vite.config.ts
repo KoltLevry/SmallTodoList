@@ -4,6 +4,7 @@ import path from 'path'
 
 // https://vite.dev/config/
 export default defineConfig({
+  base: "/SmallTodoList/",
   plugins: [react()],
   resolve: {
     alias: {
@@ -15,5 +16,6 @@ export default defineConfig({
       consultations: path.resolve(__dirname, 'src/consultations'),
       styles: path.resolve(__dirname, 'src/styles'),
     }
-  }
+  },
 })
+
