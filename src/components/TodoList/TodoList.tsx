@@ -65,17 +65,17 @@ function TodoList() {
         ));
     }
 
-    const handleToggleEdit = (id: number) => {
-        setTasks(prev => prev.map(task => 
-            task.id === id ? {...task, isEditing: !task.isEditing} : task
-        ))
-    }
+    // const handleToggleEdit = (id: number) => {
+    //     setTasks(prev => prev.map(task => 
+    //         task.id === id ? {...task, isEditing: !task.isEditing} : task
+    //     ))
+    // }
 
-    const handleEditTaskText = (id: number, newText: string) => {
-        setTasks(prev => prev.map(task =>
-            task.id === id ? {...task, text: newText, isEditing: false} : task
-        ))        
-    }
+    // const handleEditTaskText = (id: number, newText: string) => {
+    //     setTasks(prev => prev.map(task =>
+    //         task.id === id ? {...task, text: newText, isEditing: false} : task
+    //     ))        
+    // }
 
     const handleStartEditing = (id: number, text: string) => {
         setIsEditingId(id);

@@ -1,13 +1,13 @@
-import { ChangeEvent } from "react";
+import { ChangeEvent, RefObject } from "react";
 
 export interface InputProps {
     name: string,
-    type?: 'text',
+    type?: 'text'  | 'submit',
     placeholder?: string,
     label?: string,
     id?: string,
     value?: string,
     onChange?: (event: ChangeEvent<HTMLInputElement>) => void,
     error?: string,
-    ref?: null | undefined;
+    ref: RefObject<HTMLInputElement | null>;
 }

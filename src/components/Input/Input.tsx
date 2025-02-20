@@ -3,14 +3,13 @@ import { InputProps } from "./types";
 
 function Input( {
     name, 
-    type = 'text',
     placeholder,
     label,
     id,
     value,
     onChange,
     error,
-    ref,
+    // ref,
 }: InputProps) {
     return(
         <InputContainer>
@@ -22,7 +21,7 @@ function Input( {
             placeholder={placeholder}
             value={value}
             onChange={onChange}
-            ref={ref}
+            // ref={ref}
         />
         <p>{error}</p>
         </InputContainer>

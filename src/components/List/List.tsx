@@ -1,4 +1,4 @@
-import { ListBox, ListItem } from "./styles";
+import { ListBox } from "./styles";
 import { ListProps } from "./types";
 
 function List( {children}: ListProps ) {
