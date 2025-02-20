@@ -73,6 +73,7 @@ border-bottom-color: rgba(0,0,0,0.1);
 
 export const ListItemText = styled.li<ListItemsTextProps>`
 text-decoration: ${props => props.isStrikeThrough ? "line-through" : 'none'};
+text-decoration-color: red;
 `
 
 export const SmallTaskButtonDiv = styled.div`
@@ -84,7 +85,9 @@ gap: 8px;
 
 export const SmallTaskButton = styled.button<SmallTaskBtnProps>`
 background-color: ${props => props.mainColor || ''};
-cursor: ${props => props.isActive ? "pointer" : 'not-allowed'};
+/* cursor: ${props => props.isActive ? "pointer" : 'not-allowed'}; */
+cursor: pointer;
+
 font-size: 10px;
 
 &:hover {
